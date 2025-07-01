@@ -34,7 +34,7 @@ func SendAwlNotification(channel string, binColors []string) error {
 }
 
 func SendNotification(channel, message string) error {
-	topic := fmt.Sprintf("https://ntfy.sh/awl_neuss_%s_err", channel)
+	topic := fmt.Sprintf("https://ntfy.sh/awl_neuss_%s", channel)
 	_, err := http.Post(topic, "text/plain", strings.NewReader(message))
 	return err
 }
