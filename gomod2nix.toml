@@ -1,3 +1,9 @@
-schema = 1
+schema = 3
 
 [mod]
+  [mod."github.com/alexflint/go-arg"]
+    version = "v1.5.1"
+    hash = "sha256-IaQwOGoVvcmq8CRj/lyOFJhlKepg/ICxAjbtJFBK6EY="
+  [mod."github.com/alexflint/go-scalar"]
+    version = "v1.2.0"
+    hash = "sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA="
