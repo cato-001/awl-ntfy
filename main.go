@@ -20,10 +20,11 @@ func main() {
 	}
 	parser.MustParse(os.Args[1:])
 
+	NotifyChannel = fmt.Sprintf("%s-%d", args.Street, args.Home)
+
 	streetNumbers, err := GetStreetNumbers()
 	if err != nil {
-		fmt.Println(err)
-		_ = SendErr(args.Street, err)
+		_ = SendErr(err)
 		return
 	}
 
@@ -34,8 +35,7 @@ func main() {
 
 	tomorrow, err := AwlTomorrow(streetNumber, args.Home)
 	if err != nil {
-		fmt.Println(err)
-		_ = SendErr(args.Street, err)
+		_ = SendErr(err)
 		return
 	}
 
@@ -43,10 +43,9 @@ func main() {
 		return
 	}
 
-	err = SendAwlNotification(args.Street, tomorrow)
+	err = SendAwlNotification(tomorrow)
 	if err != nil {
-		fmt.Println(err)
-		_ = SendErr(args.Street, err)
+		_ = SendErr(err)
 		return
 	}
 }

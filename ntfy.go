@@ -6,7 +6,9 @@ import (
 	"strings"
 )
 
-func SendAwlNotification(channel string, binColors []string) error {
+var NotifyChannel string
+
+func SendAwlNotification(binColors []string) error {
 	var bins = make([]string, 0, 5)
 	for _, color := range binColors {
 		switch color {
@@ -30,17 +32,18 @@ func SendAwlNotification(channel string, binColors []string) error {
 		message = "Morgen werden folgende Tonnen abgeholt: "
 	}
 	message += strings.Join(bins, ", ")
-	return SendNotification(channel, message)
+	return SendNotification(message)
 }
 
-func SendNotification(channel, message string) error {
-	topic := fmt.Sprintf("https://ntfy.sh/awl_neuss_%s", channel)
+func SendNotification(message string) error {
+	topic := fmt.Sprintf("https://ntfy.sh/awl-neuss-%s", NotifyChannel)
 	_, err := http.Post(topic, "text/plain", strings.NewReader(message))
 	return err
 }
 
-func SendErr(channel string, err error) error {
-	topic := fmt.Sprintf("https://ntfy.sh/awl_neuss_%s_err", channel)
+func SendErr(err error) error {
+	fmt.Println(err)
+	topic := fmt.Sprintf("https://ntfy.sh/awl-neuss-%s-err", NotifyChannel)
 	_, err = http.Post(topic, "text/plain", strings.NewReader(err.Error()))
 	return err
 }
