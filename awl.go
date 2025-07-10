@@ -81,7 +81,7 @@ func AwlTomorrow(street, home int) ([]string, error)  {
 
 	day, ok := month[currentDay]
 	if !ok {
-		return nil, fmt.Errorf("could not access day (%s):\n%s", currentDay, string(content))
+		return nil, nil
 	}
 
 	return day, nil
