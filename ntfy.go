@@ -31,7 +31,8 @@ func SendAwlNotification(binColors []string) error {
 	} else {
 		message = "Morgen werden folgende Tonnen abgeholt: "
 	}
-	message += strings.Join(bins, ", ")
+	message += "\n"
+	message += strings.Join(bins, "\n")
 	return SendNotification(message)
 }
 
