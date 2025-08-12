@@ -11,6 +11,11 @@ func main() {
 	var args struct {
 		Street string `arg:"positional,required"`
 		Home int `arg:"positional,required"`
+		Pink bool `arg:"--pink"`
+		Yellow bool `arg:"--yellow"`
+		Blue bool `arg:"--blue"`
+		Gray bool `arg:"--gray"`
+		Brown bool `arg:"--brown"`
 	}
 
 	parser, err := arg.NewParser(arg.Config{}, &args)
@@ -19,6 +24,10 @@ func main() {
 		return
 	}
 	parser.MustParse(os.Args[1:])
+
+	if !(args.Pink || args.Yellow || args.Blue || args.Gray || args.Brown) {
+		args.Pink, args.Yellow, args.Blue, args.Gray, args.Brown = true, true, true, true, true
+	}
 
 	NotifyChannel = fmt.Sprintf("%s-%d", args.Street, args.Home)
 
@@ -43,7 +52,7 @@ func main() {
 		return
 	}
 
-	err = SendAwlNotification(tomorrow)
+	err = SendAwlNotification(tomorrow, args.Pink, args.Yellow, args.Blue, args.Gray, args.Brown)
 	if err != nil {
 		_ = SendErr(err)
 		return

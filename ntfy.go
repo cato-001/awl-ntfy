@@ -8,21 +8,35 @@ import (
 
 var NotifyChannel string
 
-func SendAwlNotification(binColors []string) error {
+func SendAwlNotification(binColors []string, pink, yellow, blue, gray, brown bool) error {
 	var bins = make([]string, 0, 5)
 	for _, color := range binColors {
 		switch color {
 		case "pink":
-			bins = append(bins, "🟣 Pink")
+			if pink {
+				bins = append(bins, "🟣 Pink")
+			}
 		case "gelb":
-			bins = append(bins, "🟡 Gelb")
+			if yellow {
+				bins = append(bins, "🟡 Gelb")
+			}
 		case "blau":
-			bins = append(bins, "🔵 Blau")
+			if blue {
+				bins = append(bins, "🔵 Blau")
+			}
 		case "grau":
-			bins = append(bins, "⚫ Grau")
+			if gray {
+				bins = append(bins, "⚫ Grau")
+			}
 		case "braun":
-			bins = append(bins, "🟤 Braun")
+			if brown {
+				bins = append(bins, "🟤 Braun")
+			}
 		}
+	}
+
+	if len(bins) == 0 {
+		return nil
 	}
 
 	var message string
