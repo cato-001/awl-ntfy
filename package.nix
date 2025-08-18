@@ -1,6 +1,6 @@
-{ pkgs }:
+{ perSystem }:
 
-pkgs.buildGoApplication {
+perSystem.gomod2nix.buildGoApplication {
   pname = "awl-ntfy";
   version = "0.1";
   pwd = ./.;

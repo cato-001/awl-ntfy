@@ -19,5 +19,5 @@
     };
   };
 
-  outputs = inputs: inputs.blueprint inputs;
+  outputs = inputs: inputs.blueprint { inherit inputs; };
 }
