@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
@@ -17,6 +18,7 @@ func main() {
 		Blue bool `arg:"--blue"`
 		Gray bool `arg:"--gray"`
 		Brown bool `arg:"--brown"`
+		List bool `arg:"--list"`
 	}
 
 	parser, err := arg.NewParser(arg.Config{}, &args)
@@ -37,6 +39,14 @@ func main() {
 	streetNumbers, err := GetStreetNumbers()
 	if err != nil {
 		_ = SendErr(err)
+		return
+	}
+
+	if args.List {
+		content, err := json.Marshal(streetNumbers)
+		if err == nil {
+			fmt.Println(string(content))
+		}
 		return
 	}
 
