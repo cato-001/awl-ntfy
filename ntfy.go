@@ -58,7 +58,7 @@ func SendNotification(message string) error {
 
 func SendErr(err error) error {
 	fmt.Println(err)
-	topic := fmt.Sprintf("https://ntfy.sh/awl-neuss-%s-err", NotifyChannel)
-	_, err = http.Post(topic, "text/plain", strings.NewReader(err.Error()))
+	topic := "https://ntfy.sh/awl-neuss-err"
+	_, err = http.Post(topic, "text/plain", strings.NewReader(NotifyChannel + "\n" + err.Error()))
 	return err
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	arg "github.com/alexflint/go-arg"
 )
@@ -29,7 +30,9 @@ func main() {
 		args.Pink, args.Yellow, args.Blue, args.Gray, args.Brown = true, true, true, true, true
 	}
 
+	replacer := strings.NewReplacer("ö", "oe", "ä", "ae", "ü", "ue", "ß", "ss")
 	NotifyChannel = fmt.Sprintf("%s-%d", args.Street, args.Home)
+	NotifyChannel = replacer.Replace(NotifyChannel)
 
 	streetNumbers, err := GetStreetNumbers()
 	if err != nil {
